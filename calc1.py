@@ -1,4 +1,5 @@
 from tkinter import *
+import math
 
 root = Tk()
 root.title("Calculator")
@@ -68,18 +69,83 @@ def button_divide():
     math = "division"
     f_num = int(first_number)  # Store the first number
     e.delete("1.0", END)  # Clear the text box 
-
+    
+# Function to handle parentheses
 def leftparent():
-    return
+    current = e.get("1.0", END).strip()  # Get current text
+    e.delete("1.0", END)  # Clear the text box
+    e.insert("1.0", str(current) + "(")  # Insert left parenthesis
 
 def rightparent():
-    return
+    current = e.get("1.0", END).strip()  # Get current text
+    e.delete("1.0", END)  # Clear the text box
+    e.insert("1.0", str(current) + ")")  # Insert right parenthesis
+
+# Function to handle percentage
 def percent():
-    return
+    current = e.get("1.0", END).strip()  # Get current text
+    try:
+        result = eval(current) / 100  # Calculate percentage
+        e.delete("1.0", END)  # Clear the text box
+        e.insert("1.0", str(result))  # Insert the result
+    except:
+        e.delete("1.0", END)  # Clear the text box if error
+        e.insert("1.0", "Error")
+
+# Function to calculate square root
 def get_root():
-    return
+    current = e.get("1.0", END).strip()  # Get current text
+    try:
+        result = math.sqrt(eval(current))  # Calculate square root
+        e.delete("1.0", END)  # Clear the text box
+        e.insert("1.0", str(result))  # Insert the result
+    except:
+        e.delete("1.0", END)  # Clear the text box if error
+        e.insert("1.0", "Error")
+
+# Function to calculate factorial
 def get_expo():
-    return
+    current = e.get("1.0", END).strip()  # Get current text
+    try:
+        result = math.factorial(eval(current))  # Calculate factorial
+        e.delete("1.0", END)  # Clear the text box
+        e.insert("1.0", str(result))  # Insert the result
+    except:
+        e.delete("1.0", END)  # Clear the text box if error
+        e.insert("1.0", "Error")
+
+# Function to compute and display the result with parentheses support
+def button_equal():
+    expression = e.get("1.0", END).strip()  # Get expression
+    e.delete("1.0", END)  # Clear the text box
+    try:
+        result = eval(expression)  # Evaluate the expression
+        e.insert("1.0", str(result))  # Insert the result
+    except:
+        e.insert("1.0", "Error")  # Insert "Error" if eval fails
+
+# Function to handle addition (no need for number conversion)
+def button_add():
+    current = e.get("1.0", END).strip()
+    e.delete("1.0", END)
+    e.insert("1.0", current + "+")  # Just append the operator
+
+# Similar functions for subtraction, multiplication, and division
+def button_subtract():
+    current = e.get("1.0", END).strip()
+    e.delete("1.0", END)
+    e.insert("1.0", current + "-")
+
+def button_multiply():
+    current = e.get("1.0", END).strip()
+    e.delete("1.0", END)
+    e.insert("1.0", current + "*")
+
+def button_divide():
+    current = e.get("1.0", END).strip()
+    e.delete("1.0", END)
+    e.insert("1.0", current + "/")
+# Insert "Error" if eval fails
 
 
 # Define buttons with appropriate text and commands
